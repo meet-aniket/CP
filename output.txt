@@ -1,1 +1,4 @@
 Present or not: 1
+Word has been removed.
+Present or not: 0
+Present or not: 1

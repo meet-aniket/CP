@@ -82,6 +82,27 @@ class Trie {
     bool searchWord(string word) {
       return searchUtil(root, word);
     }
+
+    // Remove function
+    void removeUtil(TrieNode* root, string word) {
+      if(root->isTerminal == true && word.length() == 0) {
+        root->isTerminal = false;
+        cout << "Word has been removed." << endl;
+        return;
+      }
+
+      int index = word[0]-'A';
+      TrieNode* child;
+
+      if(root->children[index] != NULL) {
+        child = root->children[index];
+        removeUtil(child, word.substr(1));
+      }
+    }
+
+    void removeWord(string word) {
+      removeUtil(root, word);
+    }
 };
 
 int main() {
@@ -92,7 +113,12 @@ int main() {
   t->insertWord("TIME");
   t->insertWord("DOG");
 
-  cout << "Present or not: " << t->searchWord("DO") << "\0";
+  cout << "Present or not: " << t->searchWord("DO") << endl;
+
+  t->removeWord("DOG");
+
+  cout << "Present or not: " << t->searchWord("DOG") << endl;
+  cout << "Present or not: " << t->searchWord("DO") << endl;
 
   return 0;
 }
